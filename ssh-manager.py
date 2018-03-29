@@ -1,7 +1,16 @@
 #!/usr/bin/python3
+# Test
+import os, json
 
-import os
+import io
+try:
+    to_unicode = unicode
+except NameError:
+    to_unicode = str
 
+## Debug data test
+data =  {'IP': [],
+         'port': []}
 
 # Functions
 
@@ -30,12 +39,28 @@ def get_user_choice():
 def host_status():
     # TODO Is the host up or down?
     return
-
+"""
 def add_host():
     # TODO Add hosts with JSON layout
     file = open(os.path.expanduser('~/.ssh_manager'), 'a')
     print("File opened")
     file.close()
+"""
+def add_host():
+    # Write JSON file
+    with io.open(os.path.expanduser('~/.ssh_manager'), 'w', encoding='utf8') as outfile:
+        data[1] = int(input("Whats the IP?"))
+        data[2] = int(input("Whats the port?"))
+        int_ = json.dumps(data,
+                          indent=4, sort_keys=True,
+                          separators=(',', ': '), ensure_ascii=False)
+        outfile.write(to_unicode(int_))
+
+    # Read JSON file
+    with open(os.path.expanduser('~/.ssh_manager')) as data_file:
+        data_loaded = json.load(data_file)
+
+    print(data == data_loaded)
 
 def remove_host():
     # TODO Remove a host you decide
