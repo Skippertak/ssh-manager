@@ -3,6 +3,10 @@
 import os
 
 
+choice = ''
+exitWords = ["q", "exit", "quit"]
+
+
 # SSH session class
 class Session:
     def __init__(self, user, ip, port):
@@ -14,5 +18,39 @@ class Session:
         os.system('ssh %(0)s@%(1)s -p %(2)s' % {'0': self.user, '1': self.ip, '2': self.port})
 
 
-test = Session('meg', '192.168.1.32', '22')
-test.connect()
+def display_main():
+    os.system('clear')
+    print("\t*********************************************************")
+    print("\t*****                  SSH Manager!                 *****")
+    print("\t*********************************************************")
+
+    try:
+        f = open(os.path.expanduser('~/.ssh_manager'), 'r')
+        # TODO Read JSON formated list of hosts and print them.
+        f.close()
+    except FileNotFoundError:
+        f = open(os.path.expanduser('~/.ssh_manager'), 'w')
+        print("No hosts yet. Consider adding some")
+        f.close()
+
+
+def get_user_choice():
+    print("\n\n[1] Add new host.")
+    print("[2] Remove old host.")
+    print("[q] Quit.")
+
+    return input("What would you like to do?")
+
+
+# Main loop
+while choice not in exitWords:
+    choice = get_user_choice()
+    display_main()
+    if choice == '1':
+        print("Placeholder 1")
+    elif choice == '2':
+        print("Placeholder 2")
+    elif choice in exitWords:
+        print("Placeholder exit")
+    else:
+        print("\nNot a valid input")
