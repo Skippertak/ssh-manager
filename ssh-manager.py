@@ -3,7 +3,6 @@
 import os
 
 
-choice = ''
 exitWords = ["q", "exit", "quit"]
 
 
@@ -27,6 +26,7 @@ def display_main():
     try:
         f = open(os.path.expanduser('~/.ssh_manager'), 'r')
         # TODO Read JSON formated list of hosts and print them.
+        print("File opened.")
         f.close()
     except FileNotFoundError:
         f = open(os.path.expanduser('~/.ssh_manager'), 'w')
@@ -38,13 +38,7 @@ def get_user_choice():
     print("\n\n[1] Add new host.")
     print("[2] Remove old host.")
     print("[q] Quit.")
-
-    return input("What would you like to do?")
-
-
-# Main loop
-while choice not in exitWords:
-    choice = get_user_choice()
+    choice = input("What would you like to do?")
     display_main()
     if choice == '1':
         print("Placeholder 1")
@@ -54,3 +48,9 @@ while choice not in exitWords:
         print("Placeholder exit")
     else:
         print("\nNot a valid input")
+
+
+if __name__ == '__main__':
+    display_main()
+    while True:
+        get_user_choice()
