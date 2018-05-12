@@ -18,6 +18,7 @@ def init():
             json.dump([], f)
             print("~/.ssh_manager created. It will be used to store hosts data.")
             time.sleep(2)
+    display_main()
 
 
 def connect(user, ip, port=22):
@@ -29,6 +30,10 @@ def display_main():
     print("\t*********************************************************")
     print("\t*****                  SSH Manager!                 *****")
     print("\t*********************************************************")
+    print("\n\n[1] Add new host.")
+    print("[2] Remove old host.")
+    print("[3] Connect to an IP.")
+    print("[q] Quit.")
 
 
 def display_hosts():
@@ -38,25 +43,40 @@ def display_hosts():
 
 
 def display_add_host():
+    os.system('clear')
+    print("\t*********************************************************")
+    print("\t*****                  SSH Manager!                 *****")
+    print("\t*********************************************************")
     print("Placeholder add host")
 
 
 def display_remove_hosts():
+    os.system('clear')
+    print("\t*********************************************************")
+    print("\t*****                  SSH Manager!                 *****")
+    print("\t*********************************************************")
     print("Placeholder remove host")
 
 
-def get_user_choice():
+def display_ssh_ip():
+    os.system('clear')
+    print("\t*********************************************************")
+    print("\t*****                  SSH Manager!                 *****")
+    print("\t*********************************************************")
+    ssh_name = input("\nWhat user do you want to ssh in as? ")
+    ssh_ip = input("\nWhat IP do you want to SSH in to? ")
+    connect(ssh_name, ssh_ip)
     display_main()
-    print("\n\n[1] Add new host.")
-    print("[2] Remove old host.")
-    print("[q] Quit.")
+
+
+def get_user_choice():
     choice = input("\nWhat would you like to do?\n")
     if choice == '1':
-        display_main()
         display_remove_hosts()
     elif choice == '2':
-        display_main()
         display_remove_hosts()
+    elif choice == '3':
+        display_ssh_ip()
     elif choice in exitWords:
         sys.exit()
     else:
