@@ -4,7 +4,7 @@ import os
 import sys
 import json
 import time
-
+import getpass
 
 exitWords = ["q", "exit", "quit"]
 
@@ -63,7 +63,9 @@ def display_ssh_ip():
     print("\t*********************************************************")
     print("\t*****                  SSH Manager!                 *****")
     print("\t*********************************************************")
-    ssh_name = input("\nWhat user do you want to ssh in as? ")
+    ssh_name = input("\nWhat user do you want to ssh in as? Press enter for '%s'" % getpass.getuser())
+    if ssh_name == "" or None:
+        ssh_name = getpass.getuser()
     ssh_ip = input("\nWhat IP do you want to SSH in to? ")
     connect(ssh_name, ssh_ip)
     display_main()
