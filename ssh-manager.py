@@ -7,6 +7,10 @@ import time
 import getpass
 
 exitWords = ["q", "exit", "quit"]
+backWords = ["b", "back", "return"]
+header = "\t *********************************************************\n\
+         *****                  SSH Manager!                 *****\n\
+         *********************************************************"
 
 
 def init():
@@ -27,9 +31,7 @@ def connect(user, ip, port=22):
 
 def display_main():
     os.system('clear')
-    print("\t*********************************************************")
-    print("\t*****                  SSH Manager!                 *****")
-    print("\t*********************************************************")
+    print(header)
     print("\n\n[1] Add new host.")
     print("[2] Remove old host.")
     print("[3] Connect to an IP.")
@@ -44,25 +46,23 @@ def display_hosts():
 
 def display_add_host():
     os.system('clear')
-    print("\t*********************************************************")
-    print("\t*****                  SSH Manager!                 *****")
-    print("\t*********************************************************")
-    print("Placeholder add host")
+    print(header)
+    print("\n\n[1] Add new host.")
+    print("[b] Go back.")
+    print("[q] Quit.")
 
 
 def display_remove_hosts():
     os.system('clear')
-    print("\t*********************************************************")
-    print("\t*****                  SSH Manager!                 *****")
-    print("\t*********************************************************")
-    print("Placeholder remove host")
+    print(header)
+    print("\n\n[1] Remove old host.")
+    print("[b] Go back.")
+    print("[q] Quit.")
 
 
 def display_ssh_ip():
     os.system('clear')
-    print("\t*********************************************************")
-    print("\t*****                  SSH Manager!                 *****")
-    print("\t*********************************************************")
+    print(header)
     ssh_name = input("\nWhat user do you want to ssh in as? Press enter for '%s'" % getpass.getuser())
     if ssh_name == "" or None:
         ssh_name = getpass.getuser()
@@ -79,6 +79,8 @@ def get_user_choice():
         display_remove_hosts()
     elif choice == '3':
         display_ssh_ip()
+    elif choice in backWords:
+        display_main()
     elif choice in exitWords:
         sys.exit()
     else:
